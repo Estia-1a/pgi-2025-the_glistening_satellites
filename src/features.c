@@ -43,3 +43,15 @@ void tenth_pixel (char *source_path){
     b=data[29];
     printf("tenth_pixel: %d, %d, %d\n", r, g, b);
 }
+
+void second_line(char *source_path) {
+    unsigned char* data = NULL;
+    int w= 0, h= 0, n= 0;
+    int r, g, b;
+    read_image_data(source_path, &data, &w, &h, &n);
+    r=data[3*w]; 
+    g=data[3*w+1]; 
+    b=data[3*w+2];
+    printf("tenth_pixel: %d, %d, %d\n", r, g, b);
+
+}
