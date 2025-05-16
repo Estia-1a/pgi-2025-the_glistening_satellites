@@ -48,6 +48,9 @@ if ( strncmp( configuration.command, "second_line", 11 ) == 0 ) {
   second_line(configuration.filenames[0]);
 }
 
+if ( strncmp( configuration.command, "get_pixel", 9 ) == 0 ) {
+  get_pixel(data, w, h, n, x, y);
+}
 
 return 0;
 }
