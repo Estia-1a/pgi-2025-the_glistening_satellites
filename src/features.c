@@ -21,3 +21,14 @@ void dimension(char *source_path) {
     read_image_data(source_path, &data, &w, &h, &n);
     printf("dimension: %d, %d\n", w, h);
 }
+
+void first_pixel (char *source_path){
+    unsigned char* data = NULL;
+    int w= 0, h= 0, n= 0;
+    int r, g, b;
+    read_image_data(source_path, &data, &w, &h, &n);
+    r=data[0]; 
+    g=data[1]; 
+    b=data[2];
+    printf("First pixel: %d, %d, %d\n", r, g, b);
+}
