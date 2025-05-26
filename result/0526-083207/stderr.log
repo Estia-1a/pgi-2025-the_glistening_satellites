@@ -1,0 +1,42 @@
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/utils.c: In function ‘get_pixel’:
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/utils.c:10:15: error: ‘NULL’ undeclared (first use in this function)
+   10 |     if (data==NULL || x>=w || y>=h){
+      |               ^~~~
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/utils.c:4:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+    3 | #include "utils.h"
+  +++ |+#include <stddef.h>
+    4 | 
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/utils.c:10:15: note: each undeclared identifier is reported only once for each function it appears in
+   10 |     if (data==NULL || x>=w || y>=h){
+      |               ^~~~
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/utils.c: In function ‘print_pixel’:
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/utils.c:17:1: error: expected declaration or statement at end of input
+   17 | void print_pixel(char *filename, int x, int y) {
+      | ^~~~
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:121: CMakeFiles/freud.dir/src/utils.c.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c: In function ‘main’:
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:13: error: ‘data’ undeclared (first use in this function)
+   52 |   get_pixel(data, w, h, n, x, y);
+      |             ^~~~
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:13: note: each undeclared identifier is reported only once for each function it appears in
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:19: error: ‘w’ undeclared (first use in this function)
+   52 |   get_pixel(data, w, h, n, x, y);
+      |                   ^
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:22: error: ‘h’ undeclared (first use in this function)
+   52 |   get_pixel(data, w, h, n, x, y);
+      |                      ^
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:25: error: ‘n’ undeclared (first use in this function)
+   52 |   get_pixel(data, w, h, n, x, y);
+      |                         ^
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:28: error: ‘x’ undeclared (first use in this function)
+   52 |   get_pixel(data, w, h, n, x, y);
+      |                            ^
+/home/runner/work/pgi-2025-the_glistening_satellites/pgi-2025-the_glistening_satellites/src/main.c:52:31: error: ‘y’ undeclared (first use in this function)
+   52 |   get_pixel(data, w, h, n, x, y);
+      |                               ^
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:107: CMakeFiles/freud.dir/src/main.c.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
