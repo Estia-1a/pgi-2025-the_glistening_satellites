@@ -48,8 +48,11 @@ if ( strncmp( configuration.command, "second_line", 11 ) == 0 ) {
   second_line(configuration.filenames[0]);
 }
 
-if ( strncmp( configuration.command, "get_pixel", 9 ) == 0 ) {
-  get_pixel(data, w, h, n, x, y);
+if ( strncmp( configuration.command, "print_pixel", 11 ) == 0 ) {
+    int x, y;
+    x= atoi(configuration.arguments[0]);
+    y= atoi(configuration.arguments[1]);
+    print_pixel(configuration.filenames[0],x,y);
 }
 
 return 0;
