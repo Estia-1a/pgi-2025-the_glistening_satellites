@@ -8,7 +8,6 @@
  * 
  */
 pixelRGB * get_pixel(unsigned char* data, const unsigned int w, const unsigned int h, const unsigned int n, const unsigned int x, const unsigned int y ) {
-    pixelRGB* pixel = malloc(sizeof(pixelRGB)) ;
     if (data==NULL){
         return NULL;
     } 
@@ -17,6 +16,14 @@ pixelRGB * get_pixel(unsigned char* data, const unsigned int w, const unsigned i
         return NULL;
     }
 
+    if ((y*w + x)*n + 2 >= w * h * n){
+        return NULL;
+    } 
+
+    pixelRGB* pixel = malloc(sizeof(pixelRGB)) ;
+    if (pixel == NULL) {
+        return NULL;
+    }
 
     pixel->R = data[(y*w + x)*n ] ;
     pixel->G = data[(y*w + x)*n + 1] ;

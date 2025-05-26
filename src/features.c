@@ -60,5 +60,9 @@ void print_pixel(char *source_path, int x, int y){
     int w = 0, h = 0, n = 0;
     read_image_data(source_path, &data, &w, &h, &n);
     pixelRGB* pixel = get_pixel(data, w, h, n, x, y);
+    if (pixel==NULL){
+        printf("NULL");
+        return;
+    }
     printf("print_pixel (%d, %d): %d %d %d", x, y, pixel->R, pixel->G, pixel->B);
 }
