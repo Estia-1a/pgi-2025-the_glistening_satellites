@@ -70,13 +70,13 @@ void print_pixel(char *source_path, int x, int y){
 }
 
 void max_pixel(char *source_path) {
-    int max = 0 , i, j, s, R , G, B , x, y ;
-    unsigned char* data = NULL;
-    int w = 0, h = 0, n = 0;
-    read_image_data(source_path, &data, &w, &h, &n);
-    for(i = 0; i < w; i++) {
-        for(j = 0; j < h; j++) {
-            pixelRGB* pixel = get_pixel(data, w, h, n, i, j);
+    int max = 0 , i, j, s, R, G, B , x, y ;
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0 ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    for(j = 0; j < h; j++) {
+        for(i = 0; i < w; i++) {
+            pixelRGB* pixel = get_pixel(data, w, h, n, i, j) ;
             s = pixel->R + pixel->G + pixel->B ;
             if (s > max) {
                 max = s ;
@@ -88,7 +88,7 @@ void max_pixel(char *source_path) {
             }
         }
     }
-    printf("max_pixel (%d,%d): %d,%d,%d", x, y, R, G, B);
+    printf("max_pixel (%d,%d): %d,%d,%d", x, y, R, G, B) ;
 }
 
             

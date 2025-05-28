@@ -20,14 +20,13 @@ pixelRGB * get_pixel(unsigned char* data, const unsigned int w, const unsigned i
         return NULL;
     } 
 
-    pixelRGB* pixel = malloc(sizeof(pixelRGB)) ;
-    if (pixel == NULL) {
-        return NULL;
-    }
+    pixelRGB* pixel ;//= malloc(sizeof(pixelRGB)) ;
 
+    pixel = (pixelRGB*) & ( data[(y*w + x)*n ]) ;
+/* 
     pixel->R = data[(y*w + x)*n ] ;
     pixel->G = data[(y*w + x)*n + 1] ;
     pixel->B =data[(y*w + x)*n + 2] ;
- 
+ */
     return pixel;
 }
