@@ -52,7 +52,7 @@ void second_line(char *source_path) {
     r=data[3*w]; 
     g=data[3*w+1]; 
     b=data[3*w+2];
-    printf("Second line: %d,%d,%d\n", r, g, b);
+    printf("Second_line: %d,%d,%d\n", r, g, b);
 }
 
 void print_pixel(char *source_path, int x, int y){
@@ -66,7 +66,7 @@ void print_pixel(char *source_path, int x, int y){
         return;
     }
     
-    printf("Print Pixel (%d,%d): %d,%d,%d", x, y, pixel->R, pixel->G, pixel->B);
+    printf("Print_Pixel (%d,%d): %d,%d,%d", x, y, pixel->R, pixel->G, pixel->B);
 }
 
 void max_pixel(char *source_path) {
