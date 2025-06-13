@@ -112,3 +112,37 @@ void min_pixel(char *source_path) {
     }
     printf("min_pixel (%d,%d): %d,%d,%d", x, y, R, G, B) ;
 }
+
+void max_component(char *source_path, char component){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, x, y, i, j, value = 0;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    for(j = 0; j < h; j++) {
+        for(i = 0; i < w; i++) {
+            pixelRGB* pixel = get_pixel(data, w, h, n, i, j) ;
+            if (component == 'R'){
+                if(value<(pixel->R)){
+                x=i;
+                y=j;
+                value = pixel->R;
+                }
+            }
+            if (component == 'G'){
+                if(value<(pixel->G)){
+                x=i;
+                y=j;
+                value = pixel->G;
+                }
+            }
+            if (component == 'B'){
+                if(value<(pixel->B)){
+                x=i;
+                y=j;
+                value = pixel->B;
+                }
+            }
+            
+        }
+    }
+    printf("max_component %c (%d, %d) : %d", component, x, y, value);
+}
