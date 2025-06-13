@@ -91,8 +91,38 @@ void max_pixel(char *source_path) {
     printf("max_pixel (%d,%d): %d,%d,%d", x, y, R, G, B) ;
 }
 
-            
-            
-            
-            
-      
+void color_red(char *source_path){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, i, t ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    t = w*h ;
+    for(i = 0; i < t; i++) {
+        data[i*n +1] = 0 ;
+        data[i*n +2] = 0 ;
+    }
+    write_image_data("image_out.bmp", data, w, h) ; 
+}
+
+void color_green(char *source_path){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, i, t ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    t = w*h ;
+    for(i = 0; i < t; i++) {
+        data[i*n] = 0 ;
+        data[i*n +2] = 0 ;
+    }
+    write_image_data("image_out.bmp", data, w, h) ; 
+}
+ 
+void color_blue(char *source_path){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, i, t ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    t = w*h ;
+    for(i = 0; i < t; i++) {
+        data[i*n] = 0 ;
+        data[i*n +1] = 0 ;
+    }
+    write_image_data("image_out.bmp", data, w, h) ; 
+}     
