@@ -215,3 +215,17 @@ void min_component(char *source_path, char component){
     }
     printf("min_component %c (%d, %d) : %d", component, x, y, value);
 }
+
+void color_gray(char *source_path){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, i, t, Gray ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    t = w*h ;
+    for(i = 0; i < t; i++) {
+        Gray = (data[i*n] + data[i*n + 1] + data[i*n + 2])/3 ;
+        data[i*n] = Gray ;
+        data[i*n + 1] = Gray ;
+        data[i*n + 2] = Gray ;
+    }
+    write_image_data("image_out.bmp", data, w, h) ; 
+}
