@@ -91,8 +91,24 @@ void max_pixel(char *source_path) {
     printf("max_pixel (%d,%d): %d,%d,%d", x, y, R, G, B) ;
 }
 
-            
-            
-            
-            
-      
+void min_pixel(char *source_path) {
+    int min = 10000, i, j, s, R, G, B , x, y ;
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0 ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    for(j = 0; j < h; j++) {
+        for(i = 0; i < w; i++) {
+            pixelRGB* pixel = get_pixel(data, w, h, n, i, j) ;
+            s = pixel->R + pixel->G + pixel->B ;
+            if (s < min) {
+                min = s ;
+                x = i ; 
+                y = j ;
+                R = pixel->R ;
+                G = pixel->G ;
+                B = pixel->B ;
+            }
+        }
+    }
+    printf("min_pixel (%d,%d): %d,%d,%d", x, y, R, G, B) ;
+}
