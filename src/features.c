@@ -126,3 +126,92 @@ void color_blue(char *source_path){
     }
     write_image_data("image_out.bmp", data, w, h) ; 
 }     
+void min_pixel(char *source_path) {
+    int min = 10000, i, j, s, R, G, B , x, y ;
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0 ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    for(j = 0; j < h; j++) {
+        for(i = 0; i < w; i++) {
+            pixelRGB* pixel = get_pixel(data, w, h, n, i, j) ;
+            s = pixel->R + pixel->G + pixel->B ;
+            if (s < min) {
+                min = s ;
+                x = i ; 
+                y = j ;
+                R = pixel->R ;
+                G = pixel->G ;
+                B = pixel->B ;
+            }
+        }
+    }
+    printf("min_pixel (%d,%d): %d,%d,%d", x, y, R, G, B) ;
+}
+
+void max_component(char *source_path, char component){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, x, y, i, j, value = 0;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    for(j = 0; j < h; j++) {
+        for(i = 0; i < w; i++) {
+            pixelRGB* pixel = get_pixel(data, w, h, n, i, j) ;
+            if (component == 'R'){
+                if(value<(pixel->R)){
+                x=i;
+                y=j;
+                value = pixel->R;
+                }
+            }
+            if (component == 'G'){
+                if(value<(pixel->G)){
+                x=i;
+                y=j;
+                value = pixel->G;
+                }
+            }
+            if (component == 'B'){
+                if(value<(pixel->B)){
+                x=i;
+                y=j;
+                value = pixel->B;
+                }
+            }
+            
+        }
+    }
+    printf("max_component %c (%d, %d) : %d", component, x, y, value);
+}
+
+void min_component(char *source_path, char component){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, x, y, i, j, value = 1000;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    for(j = 0; j < h; j++) {
+        for(i = 0; i < w; i++) {
+            pixelRGB* pixel = get_pixel(data, w, h, n, i, j) ;
+            if (component == 'R'){
+                if(value>(pixel->R)){
+                x=i;
+                y=j;
+                value = pixel->R;
+                }
+            }
+            if (component == 'G'){
+                if(value>(pixel->G)){
+                x=i;
+                y=j;
+                value = pixel->G;
+                }
+            }
+            if (component == 'B'){
+                if(value>(pixel->B)){
+                x=i;
+                y=j;
+                value = pixel->B;
+                }
+            }
+            
+        }
+    }
+    printf("min_component %c (%d, %d) : %d", component, x, y, value);
+}
