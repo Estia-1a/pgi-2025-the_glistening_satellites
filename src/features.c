@@ -229,3 +229,17 @@ void color_gray(char *source_path){
     }
     write_image_data("image_out.bmp", data, w, h) ; 
 }
+
+void color_gray_luminance(char *source_path){
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, i, t, Gray ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    t = w*h ;
+    for(i = 0; i < t; i++) {
+        Gray = data[i*n]*0.21 + data[i*n + 1]*0.72 + data[i*n + 2]*0.07 ;
+        data[i*n] = Gray ;
+        data[i*n + 1] = Gray ;
+        data[i*n + 2] = Gray ;
+    }
+    write_image_data("image_out.bmp", data, w, h) ; 
+}
