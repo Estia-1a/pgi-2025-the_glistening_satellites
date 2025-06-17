@@ -246,7 +246,7 @@ void color_gray_luminance(char *source_path){
 
 void color_invert(char *source_path){
     unsigned char* data = NULL ;
-    int w = 0, h = 0, n = 0, i, t, Gray ;
+    int w = 0, h = 0, n = 0, i, t;
     read_image_data(source_path, &data, &w, &h, &n) ;
     t = w*h ;
     for(i = 0; i < t; i++) {
@@ -255,4 +255,28 @@ void color_invert(char *source_path){
         data[i*n + 2] = 255 - data[i*n + 2] ;
     }
     write_image_data("image_out.bmp", data, w, h) ; 
+}
+
+void color_desaturate(char *source_path) {
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, i, j, t, max , min, new_value ;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+    t = w*h ;
+    for(i = 0; i < t; i++) {
+        min = data[i*n] ;
+        max =  data[i*n] ;
+        for(j = 1; j < 3; j++) {
+            if (data[i*n + j] < min ) {
+                min = data[i*n + j] ;
+            }     
+            if (data[i*n + j] > max ) {
+                max = data[i*n + j] ;
+            }
+        }
+        new_value = (max + min)/2 ;
+        data[i*n] = new_value ;
+        data[i*n + 1] = new_value ;
+        data[i*n + 2] = new_value ;
+    }
+    write_image_data("image_out.bmp", data, w, h) ;
 }
