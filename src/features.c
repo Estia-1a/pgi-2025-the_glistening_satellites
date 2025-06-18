@@ -281,7 +281,7 @@ void color_desaturate(char *source_path) {
     write_image_data("image_out.bmp", data, w, h) ;
 }
 
-void mirror_vertical(char *source_path) {
+void mirror_horizontal(char *source_path) {
     unsigned char* data = NULL ;
     int w = 0, h = 0, n = 0, i, j, l;
     read_image_data(source_path, &data, &w, &h, &n) ;
@@ -299,5 +299,4 @@ void mirror_vertical(char *source_path) {
         }
     }
     write_image_data("image_out.bmp", data, w, h) ;
-    free_image_data(data);
 }
