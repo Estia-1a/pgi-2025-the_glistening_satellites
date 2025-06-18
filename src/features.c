@@ -300,3 +300,23 @@ void mirror_horizontal(char *source_path) {
     }
     write_image_data("image_out.bmp", data, w, h) ;
 }
+
+void mirror_vertical(char *source_path) {
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+
+    int r = w * n;
+    for( int j = 0; j < h/2; j++) {
+        int t = j * r;
+        int b = (h - 1 - j) * r;
+
+        for(int i = 0; i < r ; i++) {
+            unsigned char u = data[t + i];
+            data[t + i] = data[b + i];
+            data[b + i] = u;
+        }
+    }
+    write_image_data("image_out.bmp", data, w, h) ;
+    free_image_data(data);
+}
