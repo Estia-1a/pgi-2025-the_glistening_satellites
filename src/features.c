@@ -320,3 +320,38 @@ void mirror_vertical(char *source_path) {
     write_image_data("image_out.bmp", data, w, h) ;
     free_image_data(data);
 }
+
+void mirror_total(char *source_path) {
+    unsigned char* data = NULL ;
+    int w = 0, h = 0, n = 0, l, i, j;
+    read_image_data(source_path, &data, &w, &h, &n) ;
+
+    for(j = 0; j < h/2; j++) {
+        for(i = 0; i < w ; i++) {
+            int a = (j * w + i)*n;
+            int b = ((h - 1 - j)*w + (w -1 -i)) * n;
+
+            for (l = 0; l<n; l++){
+                unsigned char t = data[a + l];
+                data[a + l] = data[b + l];
+                data[b + l] = t;
+            }
+        }
+    }
+
+    if (h%2 == 1){
+        int middle = h/2;
+        for (i = 0; i<w/2; i++){
+             int a = (middle * w + i) * n;
+             int b = (middle * w + (w - 1 -i)) * n;
+
+             for(l=0; l<n; l++){
+                unsigned char t = data[a + l];
+                data[a + l] = data[b + l];
+                data[b + l] = t;
+             }
+        }
+    }
+    write_image_data("image_out.bmp", data, w, h) ;
+    free_image_data(data);
+}
