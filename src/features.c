@@ -425,3 +425,41 @@ void scale_crop(char *source_path, int c_x, int c_y, int crop_w, int crop_h) {
  
     write_image_data("image_out.bmp", cropped_data, crop_w, crop_h);
 }
+
+void scale_nearest(char *source_path, float scale) {
+    if (scale <= 0.0f) {
+        printf("Un facteur d’échelle strictement positif est requis.\n");
+        return;
+    }
+ 
+    unsigned char *data = NULL;
+    int w = 0, h = 0, channel_count = 0;
+ 
+    read_image_data(source_path, &data, &w, &h, &channel_count);
+ 
+    int nouveau_w = (int)(w * scale);
+    int nouveau_h = (int)(h * scale);
+ 
+    unsigned char *n_data = malloc(nouveau_w * nouveau_h * channel_count);
+    if (n_data == NULL) {
+        printf("Allocation mémoire impossible.\n");
+        return;
+    }
+ 
+    for (int nouveau_y = 0; nouveau_y < nouveau_h; nouveau_y++) {
+        for (int nouveau_x = 0; nouveau_x < nouveau_w; nouveau_x++) {
+            int ancien_x = (int)(nouveau_x / scale);
+            int ancien_y = (int)(nouveau_y / scale);
+ 
+            if (ancien_x >= w) ancien_x = w - 1;
+            if (ancien_y >= h) ancien_y = h - 1;
+ 
+            for (int c = 0; c < channel_count; c++) {
+                n_data[(nouveau_y * nouveau_w + nouveau_x) * channel_count + c] =
+                    data[(ancien_y * w + ancien_x) * channel_count + c];
+            }
+        }
+    }
+ 
+    write_image_data("image_out.bmp", n_data, nouveau_w, nouveau_h);
+}

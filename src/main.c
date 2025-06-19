@@ -127,5 +127,11 @@ if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
     scale_crop (configuration.filenames[0], c_x, c_y, w, h);
 }
 
+else if (strncmp(configuration.command, "scale_nearest", 13) == 0) {
+    float scale = atof(configuration.arguments[0]);
+    scale_nearest(configuration.filenames[0], scale);
+}
+ 
+ 
 return 0;
 }
