@@ -26,5 +26,6 @@ void rotate_acw(char *source_path);
 void rotate_cw(char *source_path);
 void scale_crop(char *source_path, int c_x, int c_y, int crop_w, int crop_h);
 void scale_nearest(char *source_path, float scale);
+void scale_bilinear(char *source_path, float scale);
 
 #endif

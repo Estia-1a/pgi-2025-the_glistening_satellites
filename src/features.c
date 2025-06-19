@@ -1,9 +1,11 @@
 #include <estia-image.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "features.h"
 #include "utils.h"
+
 
 /**
  * @brief Here, you have to code features of the project.
@@ -462,4 +464,50 @@ void scale_nearest(char *source_path, float scale) {
     }
  
     write_image_data("image_out.bmp", n_data, nouveau_w, nouveau_h);
+}
+
+void scale_bilinear(char *source_path, float scale) {
+    if (scale <= 0.0f) {
+        printf("Un facteur d’échelle strictement positif est requis.\n");
+        return;
+    }
+    unsigned char *data = NULL;
+    int w = 0, x = 0, n = 0;
+    read_image_data(source_path, &data, &w, &x, &n);
+    int nv_w = (int)(w * scale);
+    int nv_x = (int)(x * scale);
+    unsigned char *nv_data = malloc(nv_w * nv_x * n);
+    if (!nv_data) {
+        printf("Allocation mémoire impossible.\n");
+        return;
+    }
+    for (int nv_y = 0; nv_y < nv_x; nv_y++) {
+        for (int nv_x = 0; nv_x < nv_w; nv_x++) {
+            float x_orig = nv_x / scale;
+            float y_orig = nv_y / scale;
+            int x0 = (int)floor(x_orig);
+            int x1 = x0 + 1;
+            int y0 = (int)floor(y_orig);
+            int y1 = y0 + 1;
+            x0 = x0 < 0 ? 0 : (x0 >= w ? w - 1 : x0);
+            x1 = x1 < 0 ? 0 : (x1 >= w ? w - 1 : x1);
+            y0 = y0 < 0 ? 0 : (y0 >= x ? x - 1 : y0);
+            y1 = y1 < 0 ? 0 : (y1 >= x ? x - 1 : y1);
+            float dx = x_orig - x0;
+            float dy = y_orig - y0;
+            for (int c = 0; c < n; c++) {
+                float q11 = data[(y0 * w + x0) * n + c];
+                float q21 = data[(y0 * w + x1) * n + c];
+                float q12 = data[(y1 * w + x0) * n + c];
+                float q22 = data[(y1 * w + x1) * n + c];
+                float r1 = q11 + dx * (q21 - q11);
+                float r2 = q12 + dx * (q22 - q12);
+                float p = r1 + dy * (r2 - r1);
+                if (p < 0) p = 0;
+                if (p > 255) p = 255;
+                nv_data[(nv_y * nv_w + nv_x) * n + c] = (unsigned char)(p);
+            }
+        }
+    }
+    write_image_data("image_out.bmp", nv_data, nv_w, nv_x);
 }
