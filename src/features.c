@@ -394,3 +394,34 @@ void rotate_cw(char *source_path){
     }
     write_image_data("image_out.bmp", rotate_data, h, w);
 }
+
+void scale_crop(char *source_path, int c_x, int c_y, int crop_w, int crop_h) {
+    unsigned char *data = NULL;
+    int w, h, channel_count;
+ 
+    read_image_data(source_path, &data, &w, &h, &channel_count);
+ 
+    int start_x = c_x - crop_w / 2;
+    int start_y = c_y - crop_h / 2;
+ 
+    unsigned char *cropped_data = malloc(crop_w * crop_h * channel_count);
+ 
+    for (int j = 0; j < crop_h; j++) {
+        for (int i = 0; i < crop_w; i++) {
+            int src_x = start_x + i;
+            int src_y = start_y + j;
+ 
+            for (int c = 0; c < channel_count; c++) {
+                if (src_x >= 0 && src_x < w && src_y >= 0 && src_y < h) {
+                    cropped_data[(j * crop_w + i) * channel_count + c] =
+                        data[(src_y * w + src_x) * channel_count + c];
+                } else {
+                    // Remplir en noir si on sort de l'image
+                    cropped_data[(j * crop_w + i) * channel_count + c] = 0;
+                }
+            }
+        }
+    }
+ 
+    write_image_data("image_out.bmp", cropped_data, crop_w, crop_h);
+}

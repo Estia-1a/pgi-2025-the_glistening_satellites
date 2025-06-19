@@ -119,6 +119,13 @@ if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
     rotate_cw(configuration.filenames[0]);
 }
 
-return 0;
+ else if (strncmp(configuration.command, "scale_crop", 10) == 0) {
+    int c_x = atoi(configuration.arguments[0]);
+    int c_y = atoi(configuration.arguments[1]);
+    int w = atoi(configuration.arguments[2]);
+    int h = atoi(configuration.arguments[3]);
+    scale_crop (configuration.filenames[0], c_x, c_y, w, h);
 }
 
+return 0;
+}
