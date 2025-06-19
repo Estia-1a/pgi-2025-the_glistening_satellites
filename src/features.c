@@ -1,5 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "features.h"
 #include "utils.h"
@@ -354,4 +355,23 @@ void mirror_total(char *source_path) {
     }
     write_image_data("image_out.bmp", data, w, h) ;
     free_image_data(data);
+}
+
+void rotate_acw(char *source_path){
+    unsigned char* data = NULL;
+    int w, h, n, x, y;
+    read_image_data(source_path, &data, &w, &h, &n);
+    unsigned char* rotate_data = malloc(w * h * n);
+    for(y=0; y<h; y++){
+        for(x=0; x<w; x++){      
+            pixelRGB* current_pixel = get_pixel(data, w, h, n, x, y);
+            int nouveau_x = y;
+            int nouveau_y = w - 1 - x;
+            pixelRGB* rotate_pixel = get_pixel(rotate_data, h, w, n, nouveau_x, nouveau_y);
+            rotate_pixel->R = current_pixel->R;
+            rotate_pixel->G = current_pixel->G;
+            rotate_pixel->B = current_pixel->B;
+        }
+    }
+    write_image_data("image_out.bmp", rotate_data, h, w);
 }

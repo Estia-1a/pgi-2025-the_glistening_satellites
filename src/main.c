@@ -111,6 +111,10 @@ if ( strncmp( configuration.command, "mirror_total", 12 ) == 0 ) {
   mirror_total(configuration.filenames[0]);
 }
 
+if ( strncmp( configuration.command, "rotate_acw", 10 ) == 0 ) {
+    /* rotate_cw() function is defined in feature.h and implemented in feature.c */
+    rotate_acw(configuration.filenames[0]);
+}
 
 return 0;
 }
